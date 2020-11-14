@@ -25,6 +25,11 @@ provider:
   runtime: nodejs12.x
   region: eu-west-1
   stage: dev
+  environment:
+    PG_HOST: database-1.cl66ht8caoqs.eu-west-1.rds.amazonaws.com
+    PG_PORT: 5432
+    PG_DATABASE: postgres1
+    PG_USERNAME: postgres
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -42,14 +47,6 @@ provider:
 #            - "Ref" : "ServerlessDeploymentBucket"
 #            - "/*"
 
-
-environment:
-  PG_HOST: database-1.cl66ht8caoqs.eu-west-1.rds.amazonaws.com
-  PG_PORT: 5432
-  PG_DATABASE: postgres
-  PG_USERNAME: postgres
-  PG_PASSWORD: oxxmlOy5wkL8MXSjd8Bd
-
 # you can add packaging information here
 #package:
 #  include:
@@ -60,6 +57,8 @@ environment:
 #    - exclude-me-dir/**
 
 functions:
+  invoke:
+    handler: handlers/products.invoke
   getProductsList:
     handler: handlers/products.getProductsList
     events:
